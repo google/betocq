@@ -188,21 +188,11 @@ Prepare the following materials to be used for the tests.
 
 #### Get the test codes, tools, and configure build
 
-1.  Download the release test binary files (see release instructions) and save them
-in a local directory:
-  - `betocq_test_suite` (Linux and macOS)
-  - `betocq_test_suite_windows.zip` (Windows only)
-  - `local_mobly_runner.py`
-  - `cuj_and_test_config.yml`
+1.  Download the latest release test binary files from
+   https://github.com/android/betocq/releases and save them in a local
+   directory.
 
-2. Make these two files executable (Linux and macOS only):
-
-  ```
-  chmod +x betocq_test_suite
-  chmod +x local_mobly_runner.py
-  ```
-
-3.  Check and install Python version 3.11 or later:
+2.  Check and install Python version 3.11 or later:
     -   Check your Python 3 version number:
 
       ```
@@ -217,7 +207,7 @@ in a local directory:
       Or install the latest version from
       [python.org](https://www.python.org/downloads/windows) for Windows.
 
-4. Windows only: Download [adb](https://developer.android.com/tools/releases/platform-tools)
+3. Windows only: Download [adb](https://developer.android.com/tools/releases/platform-tools)
    and add its path to the [`Path` environment variable](https://stackoverflow.com/questions/44272416/how-to-add-a-folder-to-path-environment-variable-in-windows-10-with-screensho).
 
 #### Configure Wi-Fi AP and test
@@ -317,6 +307,30 @@ in a local directory:
 
 
 ### Run the test
+
+#### For BeToCQ versions 2.3.2 and newer
+
+To run the test, run the following commands from the local directory:
+
+  ```
+  python3 local_mobly_runner.py --wheel <the test .whl file> --bin betocq_test_suite -tb Quickstart -i -c cuj_and_test_config.yml
+  ```
+
+Note that `Quickstart` is the CUJ test name and there are
+a few other supported CUJ tests listed in `cuj_and_test_config.yml`.
+
+If there are more than two devices connected to USB ports, specify the device
+serial number explicitly:
+
+  ```
+  python3 local_mobly_runner.py --wheel <the test .whl file> --bin betocq_test_suite -tb Quickstart -i -s <serial1>,<serial2> -c cuj_and_test_config.yml
+  ```
+
+Note that no space is allowed between
+two device serial numbers in the above commafnd.
+
+#### For BeToCQ versions 2.3.1 and older
+
 To run the test on Linux and macOS with test binary, run the following commands from the local
 directory:
 
